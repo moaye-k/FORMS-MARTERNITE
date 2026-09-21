@@ -34,6 +34,19 @@
     td { padding:13px 16px; border-top:1px solid var(--line); color:var(--ink); }
     tr:hover td { background:#FAFBFC; }
     .empty-state { padding: 60px 20px; text-align:center; color: var(--gray); font-size: 14px;}
+    @media (max-width: 640px) {
+        body { padding-bottom: 20px; }
+        .hero { clip-path: polygon(0 0,100% 0,100% 94%,0 100%); padding:22px 20px 36px; display:block; }
+        .brand-logo { width:52px; height:52px; }
+        .hero-left h1 { font-size:19px; line-height:1.25; }
+        .export-btn { width:100%; justify-content:center; margin-top:18px; }
+        .content { margin:-12px 10px 0; }
+        .stat-row { gap:8px; }
+        .stat-card { min-width:calc(50% - 4px); padding:13px 12px; }
+        .stat-num { font-size:20px; }
+        .stat-label { font-size:11px; }
+        .table-head { padding:15px 14px 12px; }
+    }
 </style>
 </head>
 <body>
