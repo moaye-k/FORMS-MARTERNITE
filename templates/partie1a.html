@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero">
+    <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS">
+    <div class="step-label">Étape {{ step }} sur {{ total_steps }} — Partie 1 : votre expérience</div>
+    <h1>Utilisation de l'outil E-CNPS</h1>
+    <div class="progress-track"><div class="progress-fill" style="width: {{ (step/total_steps*100)|int }}%;"></div></div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="question-block">
+        <p class="q-text">Sur quel support avez-vous principalement effectué la démarche ?</p>
+        <div class="radio-pill-row">
+            {% for choix in support %}
+            <label class="radio-pill">
+                <input type="radio" name="support" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Quel est votre niveau de satisfaction pour chacune des étapes ?</p>
+        <p class="q-hint">Cochez une case par ligne (laissez vide si non concernée).</p>
+        <table class="matrix">
+            <tr>
+                <th></th>
+                {% for label in scale %}<th>{{ label }}</th>{% endfor %}
+            </tr>
+            {% for code, label in rows %}
+            <tr>
+                <td>{{ label }}</td>
+                {% for opt in scale %}
+                <td><input type="radio" name="{{ code }}" value="{{ opt }}"></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <button class="cta" type="submit">Continuer →</button>
+</form>
+{% endblock %}

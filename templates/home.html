@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero" style="clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); padding-bottom: 56px;">
+    <div class="brand-row">
+        <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS">
+        <div class="step-label">ENQUÊTE DE SATISFACTION MATERNITÉ</div>
+    </div>
+    <div class="edition-label">ÉDITION 2026</div>
+    <div class="direction-label">Direction marketing, communication et expérience client</div>
+</div>
+{% endblock %}
+{% block content %}
+<p style="font-size:14.5px; color:#33383D; line-height:1.7; margin:0 0 18px;">Votre avis sur la qualité de la demande d'indemnités journalières de maternité en ligne nous aide à améliorer l'accompagnement proposé à toutes les futures mamans.</p>
+<p style="font-size:14.5px; color:#33383D; line-height:1.7; margin:0 0 24px;"><em>La CNPS, votre partenaire pour la vie.</em></p>
+<a class="cta" href="{{ url_for('q1') }}">Commencer</a>
+{% endblock %}

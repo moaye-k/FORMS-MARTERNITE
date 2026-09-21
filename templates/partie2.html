@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero">
+    <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS">
+    <div class="step-label">Étape {{ step }} sur {{ total_steps }} — Partie 2 : votre avis global</div>
+    <h1>Votre satisfaction et vos suggestions</h1>
+    <div class="progress-track"><div class="progress-fill" style="width: {{ (step/total_steps*100)|int }}%;"></div></div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="question-block">
+        <p class="q-text">Globalement, êtes-vous satisfaite de votre demande d'indemnités de maternité en ligne ?</p>
+        <div class="radio-pill-row">
+            {% for choix in csat %}
+            <label class="radio-pill">
+                <input type="radio" name="csat" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Comment jugez-vous le délai de traitement de votre demande ?</p>
+        <div class="radio-pill-row">
+            {% for choix in delai %}
+            <label class="radio-pill">
+                <input type="radio" name="delai" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Vous êtes-vous sentie en confiance quant à la bonne prise en charge de votre dossier ?</p>
+        <div class="radio-pill-row">
+            {% for choix in confiance %}
+            <label class="radio-pill">
+                <input type="radio" name="confiance" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Qu'avez-vous le plus apprécié dans cette démarche en ligne ? <em style="font-weight:400;">(facultatif)</em></p>
+        <textarea name="apprecie"></textarea>
+    </div>
+
+    <div class="question-block" style="border-bottom:none;">
+        <p class="q-text">Que faudrait-il améliorer en priorité pour les futures mamans ? <em style="font-weight:400;">(facultatif)</em></p>
+        <textarea name="ameliorer"></textarea>
+    </div>
+
+    <button class="cta" type="submit">Envoyer mes réponses →</button>
+</form>
+{% endblock %}

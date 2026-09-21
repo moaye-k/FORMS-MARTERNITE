@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-CNPS Maternité{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0B2545; --orange: #E8641F; --ice: #F4F6F9;
+            --ink: #14213D; --gray: #6b7488; --line: #E4E7EB; --green: #0F7B4E;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; font-family: 'Inter', Arial, sans-serif;
+            background: var(--ice); min-height: 100vh;
+            display: flex; justify-content: center; padding: 0 0 40px;
+        }
+        .page-wrap { width: 100%; max-width: 680px; }
+        .hero {
+            background: var(--navy);
+            clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+            padding: 30px 40px 46px;
+        }
+        .brand-logo { display: block; width: 56px; height: 56px; object-fit: contain; background: white; margin-bottom: 16px; }
+        .brand-row { display: flex; align-items: center; gap: 14px; }
+        .brand-row .brand-logo { flex: 0 0 auto; margin-bottom: 0; }
+        .brand-row .step-label { margin-bottom: 0; }
+        .step-label { color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+        .edition-label { color: #F6A05A; font-size: 14px; font-weight: 700; margin-top: 28px; margin-bottom: 14px; }
+        .direction-label { color: rgba(255,255,255,0.72); font-size: 12px; line-height: 1.5; white-space: nowrap; }
+        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; color: white; margin: 0 0 14px; }
+        .progress-track { height: 5px; background: rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--orange); border-radius: 4px; }
+        .body-panel {
+            background: white; margin: -26px 26px 0; border-radius: 14px;
+            padding: 30px 32px 32px; box-shadow: 0 20px 50px rgba(11,37,69,0.15);
+        }
+        .question-block { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+        .question-block:last-of-type { border-bottom: none; margin-bottom: 8px; padding-bottom: 0; }
+        .q-text { font-weight: 600; font-size: 14.5px; color: var(--ink); margin: 0 0 14px; line-height: 1.5; }
+        .q-hint { font-weight: 400; font-size: 12.5px; color: var(--gray); margin: -10px 0 14px; }
+
+        .radio-pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .radio-pill { flex: 1; min-width: 130px; border: 1.5px solid var(--line); border-radius: 10px;
+            padding: 12px 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--gray);
+            cursor: pointer; }
+        .radio-pill input { display: none; }
+        .radio-pill:has(input:checked) { border-color: var(--orange); color: var(--orange); background: #FDF0E8; }
+
+        .radio-pill-col { display: flex; flex-direction: column; gap: 8px; }
+        .radio-pill-col .radio-pill { min-width: unset; text-align: left; }
+
+        textarea, .fake-select {
+            width: 100%; border: 1.5px solid var(--line); border-radius: 10px;
+            padding: 12px 14px; font-family: inherit; font-size: 13.5px; color: var(--ink);
+        }
+        textarea { min-height: 70px; resize: vertical; }
+
+        table.matrix { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        table.matrix th { font-weight: 600; color: var(--gray); font-size: 11px; text-align: center; padding: 6px 4px 10px; }
+        table.matrix th:first-child { text-align: left; }
+        table.matrix td { padding: 10px 4px; text-align: center; border-top: 1px solid var(--line); }
+        table.matrix td:first-child { text-align: left; font-weight: 500; color: var(--ink); padding-right: 10px; }
+        table.matrix input[type=radio] { width: 16px; height: 16px; accent-color: var(--orange); }
+
+        .nps-row { display: flex; gap: 4px; }
+        .nps-btn { flex: 1; text-align: center; }
+        .nps-btn input { display: none; }
+        .nps-btn label {
+            display: block; padding: 10px 0; border: 1.5px solid var(--line); border-radius: 8px;
+            font-weight: 700; font-size: 13px; color: var(--ink); cursor: pointer;
+        }
+        .nps-btn input:checked + label { border-color: var(--orange); background: #FDF0E8; color: var(--orange); }
+        .nps-scale-labels { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--gray); margin-top: 6px; }
+
+        .cta {
+            text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--orange); color: white; font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600; font-size: 15px; padding: 15px 24px; border-radius: 10px;
+            border: none; cursor: pointer; width: 100%; margin-top: 6px;
+        }
+        .cta:hover { opacity: 0.94; }
+        .back-button {
+            display: block; width: fit-content; margin: 18px auto 0;
+            padding: 8px 14px; border: none; background: transparent;
+            color: var(--gray); font-family: inherit; font-size: 13px;
+            cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+        }
+        .back-button:hover { color: var(--ink); }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    {% block hero %}{% endblock %}
+    <div class="body-panel">
+        {% block content %}{% endblock %}
+        {% if request.endpoint in ['q1', 'q2', 'partie1a', 'partie1b', 'partie1c', 'partie2'] %}
+        <button class="back-button" type="button" onclick="window.history.back()">← Précédent</button>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

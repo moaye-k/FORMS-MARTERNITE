@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero" style="clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); text-align:center; position:relative; overflow:hidden;">
+    <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS" style="margin:0 auto 18px;">
+    <div style="width:56px;height:56px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin:10px auto 20px;">
+        <span style="color:white;font-size:26px;font-weight:700;">✓</span>
+    </div>
+    <h1 style="text-align:center;">Merci pour votre témoignage !</h1>
+</div>
+{% endblock %}
+{% block content %}
+<p style="text-align:center; color:#6b7488; font-size:14.5px; line-height:1.7;">
+Votre avis nous aide à rendre la démarche d'indemnités de maternité plus simple
+et plus sereine pour toutes les futures mamans.
+</p>
+<a class="cta" href="{{ url_for('home') }}">Fermer</a>
+{% endblock %}

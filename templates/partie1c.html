@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero">
+    <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS">
+    <div class="step-label">Étape {{ step }} sur {{ total_steps }} — Partie 1 : votre expérience</div>
+    <h1>Avez-vous eu besoin d'aide ?</h1>
+    <div class="progress-track"><div class="progress-fill" style="width: {{ (step/total_steps*100)|int }}%;"></div></div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="question-block" style="border-bottom:none;">
+        <p class="q-text">Avez-vous eu besoin d'aide pour finaliser votre demande ?</p>
+        <div class="radio-pill-col">
+            {% for choix in aide %}
+            <label class="radio-pill">
+                <input type="radio" name="aide" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+    <button class="cta" type="submit">Continuer →</button>
+</form>
+{% endblock %}

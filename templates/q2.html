@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero">
+    <img class="brand-logo" src="{{ url_for('static', filename='cnps-logo.svg') }}" alt="Logo CNPS">
+    <div class="step-label">Étape {{ step }} sur {{ total_steps }}</div>
+    <h1>Votre demande</h1>
+    <div class="progress-track"><div class="progress-fill" style="width: {{ (step/total_steps*100)|int }}%;"></div></div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="question-block">
+        <p class="q-text">S'agissait-il de votre première demande de ce type auprès de la CNPS ?</p>
+        <div class="radio-pill-row">
+            {% for choix in premiere_demande %}
+            <label class="radio-pill">
+                <input type="radio" name="premiere_demande" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">À quel moment avez-vous effectué votre demande ?</p>
+        <div class="radio-pill-row">
+            {% for choix in moment_demande %}
+            <label class="radio-pill">
+                <input type="radio" name="moment_demande" value="{{ choix }}" required>
+                {{ choix }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Quelle est la probabilité que vous recommandiez ce service en ligne à une autre femme salariée ?</p>
+        <div class="nps-row">
+            {% for i in range(11) %}
+            <div class="nps-btn">
+                <input type="radio" name="nps_note" id="nps_{{ i }}" value="{{ i }}" required>
+                <label for="nps_{{ i }}">{{ i }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="nps-scale-labels">
+            <span>Pas du tout probable</span>
+            <span>Tout à fait probable</span>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <p class="q-text">Pour quelle raison principale donnez-vous cette note ? <em style="font-weight:400;">(facultatif)</em></p>
+        <textarea name="nps_raison"></textarea>
+    </div>
+
+    <button class="cta" type="submit">Continuer →</button>
+</form>
+{% endblock %}
