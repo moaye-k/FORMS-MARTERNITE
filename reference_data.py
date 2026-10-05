@@ -21,7 +21,6 @@ SATISFACTION_ROWS = [
     ("p1_acces", "Accès / connexion au compte sur E-CNPS"),
     ("p1_comprehension_pieces", "Compréhension des pièces à fournir (certificats, bulletins, acte de naissance…)"),
     ("p1_televersement", "Téléversement / envoi des documents en ligne"),
-    ("p1_suivi", "Suivi de l'état d'avancement du dossier"),
     ("p1_info_montant", "Information sur le calcul et le montant de l'indemnité"),
     ("p1_delai_versement", "Délai jusqu'au versement de l'indemnité"),
 ]
